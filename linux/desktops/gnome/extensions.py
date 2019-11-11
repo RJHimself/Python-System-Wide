@@ -52,7 +52,7 @@ def get_versions(link):
     )
 
 
-    arrShellVersions=ui.select.toArray(slcShellVersions)[1:]
+    arrShellVersions=ui.select.toArray(slcShellVersions, "html")[1:]
     arrExtensionVersions=ui.select.toArray(slcExtensionVersions, "html")[1:]
 
     return arrShellVersions, arrExtensionVersions
@@ -77,6 +77,11 @@ def download(link, location = cwd, shellVersion = None, extensionVersion = None)
 
 
     # Shell Versions
+    slcShell = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "select.shell-version"))
+    )
+
+    shellVersion = ui.select.getValueOfInnerHtml(slcShell, shellVersion)
     selectedShell = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "select.shell-version option[value='"+shellVersion+"']"))
     )
