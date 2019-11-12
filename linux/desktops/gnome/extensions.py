@@ -24,7 +24,12 @@ from apps_enhancements.web import browser
 
 home = expanduser("~")
 cwd = os.getcwd()
-driver = webdriver.Chrome("/usr/bin/chromedriver")
+
+
+options = webdriver.ChromeOptions()
+options.add_argument("download.default_directory="+home+"/Downloads")
+
+driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver", chrome_options=options)
 # driver = webdriver.Firefox("/usr/bin/geckodriver")
 # driver = webdriver.Firefox()
 
@@ -107,8 +112,6 @@ def download(link, location = cwd, shellVersion = None, extensionVersion = None)
         EC.presence_of_element_located((By.CSS_SELECTOR, "select.extension-version option[value='"+extensionVersion+"']"))
     )
 
-
-    print("FUCK 3")
 
     time.sleep(5)
     selectedExtension.click()
