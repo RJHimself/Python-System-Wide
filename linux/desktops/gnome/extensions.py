@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 
 
+# <~~~~~~{ WARNING }~~~~~~>
+# This File can NOT be well executed through vs code's terminal, due to driver issues, the RunningDesktop on vs code's terminal is UNITY instead of GNOME, which causes various stupid fuckiiing problems XDDD
+
+
 import time
 import sys
 import os.path
