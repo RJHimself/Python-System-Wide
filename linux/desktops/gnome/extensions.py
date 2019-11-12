@@ -129,4 +129,4 @@ def download(link, location = cwd, shellVersion = None, extensionVersion = None)
 
 
 # print(get_versions("https://extensions.gnome.org/extension/750/openweather/"))
-print(download("https://extensions.gnome.org/extension/750/openweather/"))
+# print(download("https://extensions.gnome.org/extension/750/openweather/"))
