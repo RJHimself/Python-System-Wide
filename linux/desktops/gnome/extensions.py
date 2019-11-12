@@ -2,7 +2,7 @@
 
 
 # <~~~~~~{ WARNING }~~~~~~>
-# This File can NOT be well executed through vs code's terminal, due to driver issues, the RunningDesktop on vs code's terminal is UNITY instead of GNOME, which causes various stupid fuckiiing problems XDDD
+# This File can NOT be well executed through vs code's terminal, due to driver issues, the RunningDesktop on vs code's terminal is UNITY instead of GNOME, which causes various stupid fuckiiing problems!!! XDDD
 
 
 import time
