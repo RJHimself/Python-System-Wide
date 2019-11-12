@@ -7,7 +7,10 @@ import os.path
 from os import path
 from os.path import expanduser
 from selenium import webdriver
+
 from selenium.webdriver.chrome.options import Options
+# from selenium.webdriver.firefox.options import Options
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -18,6 +21,8 @@ from apps_enhancements.web import browser
 home = expanduser("~")
 cwd = os.getcwd()
 driver = webdriver.Chrome("/usr/bin/chromedriver")
+# driver = webdriver.Firefox("/usr/bin/geckodriver")
+# driver = webdriver.Firefox()
 
 
 def get_link(link):
@@ -102,7 +107,7 @@ def download(link, location = cwd, shellVersion = None, extensionVersion = None)
     print("FUCK 3")
 
     time.sleep(5)
-    # selectedExtension.click()
+    selectedExtension.click()
     time.sleep(50)
 
 
