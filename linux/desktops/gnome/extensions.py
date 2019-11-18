@@ -96,7 +96,8 @@ def download(link, location = cwd, shellVersion = None, extensionVersion = None)
     selectedExtension.click()
 
 
-    time.sleep(5)
+    # time.sleep(5)
+    time.sleep(15)
     # time.sleep(50)
     browser.quit()
 
