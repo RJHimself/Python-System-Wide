@@ -20,18 +20,11 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from python_apps_enhancements.web import ui
-from python_apps_enhancements.web import browser
+from python_apps_enhancements.web.browser import chrome
 
 home = expanduser("~")
 cwd = os.getcwd()
 
-
-options = webdriver.ChromeOptions()
-options.add_argument("download.default_directory="+home+"/Downloads")
-
-driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver", chrome_options=options)
-# driver = webdriver.Firefox("/usr/bin/geckodriver")
-# driver = webdriver.Firefox()
 
 
 def get_link(link):
@@ -44,33 +37,28 @@ def get_link(link):
 
 
 def get_versions(link):
-    driver.get(get_link(link))
+    options = webdriver.ChromeOptions()
+    options.add_argument("download.default_directory="+home+"/Downloads")
 
+    browser = webdriver.Chrome(executable_path="/usr/bin/chromedriver", chrome_options=options)
+    browser.get(get_link(link))
+
+
+    # Click the First Shell Select Option to Load the 2nd
+    shell_first_option = ui.get_element(browser, "select.shell-version option:nth-of-type(2)")
+    shell_first_option.click()
 
     # Shell Versions
-    shellFirstOption = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "select.shell-version option:nth-of-type(2)"))
-    )
-    slcShellVersions = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "select.shell-version"))
-    )
-    shellFirstOption.click()
-
-
+    slc_shell_versions = ui.get_element(browser, "select.shell-version")
     # Extension Versions
-    extensionFirstOption = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "select.extension-version option:nth-of-type(2)"))
-    )
-    slcExtensionVersions = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "select.extension-version"))
-    )
+    slc_extension_versions = ui.get_element(browser, "select.extension-version")
 
 
-    arrShellVersions=ui.select.toArray(slcShellVersions, "html")[1:]
-    arrExtensionVersions=ui.select.toArray(slcExtensionVersions, "html")[1:]
+    arrShellVersions=ui.select.toArray(slc_shell_versions, "html")[1:]
+    arrExtensionVersions=ui.select.toArray(slc_extension_versions, "html")[1:]
 
+    browser.quit()
     return arrShellVersions, arrExtensionVersions
-    driver.quit()
 
 
 def get_shell_versions(link): return get_versions(link)[0]
@@ -78,7 +66,11 @@ def get_extension_versions(link): return get_versions(link)[1]
 
 
 def download(link, location = cwd, shellVersion = None, extensionVersion = None):
-    driver.get(get_link(link))
+    # options = webdriver.ChromeOptions()
+    # options.add_argument("download.default_directory="+home+"/Downloads")
+
+    browser = chrome.Start()
+    browser.get(get_link(link))
 
     arrShellVersions=get_shell_versions(link)
     arrExtensionVersions=get_extension_versions(link)
@@ -91,31 +83,22 @@ def download(link, location = cwd, shellVersion = None, extensionVersion = None)
 
 
     # Shell Versions
-    slcShell = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "select.shell-version"))
-    )
-
+    slcShell = ui.get_element(browser, "select.shell-version")
     shellVersion = ui.select.getValueOfInnerHtml(slcShell, shellVersion)
-    selectedShell = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "select.shell-version option[value='"+shellVersion+"']"))
-    )
+    selectedShell = ui.get_element(browser, "select.shell-version option[value='"+shellVersion+"']")
     selectedShell.click()
 
 
     # Extension Versions
-    slcExtension = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "select.extension-version"))
-    )
-
+    slcExtension = ui.get_element(browser, "select.extension-version")
     extensionVersion = ui.select.getValueOfInnerHtml(slcExtension, extensionVersion)
-    selectedExtension = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "select.extension-version option[value='"+extensionVersion+"']"))
-    )
+    selectedExtension = ui.get_element(browser, "select.extension-version option[value='"+extensionVersion+"']")
+    selectedExtension.click()
 
 
     time.sleep(5)
-    selectedExtension.click()
-    time.sleep(50)
+    # time.sleep(50)
+    browser.quit()
 
 
 
