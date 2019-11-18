@@ -85,6 +85,7 @@ def download(link, location = cwd, shellVersion = None, extensionVersion = None)
     # Shell Versions
     slcShell = ui.get_element(browser, "select.shell-version")
     shellVersion = ui.select.getValueOfInnerHtml(slcShell, shellVersion)
+    print("select.shell-version option[value='"+shellVersion+"']")
     selectedShell = ui.get_element(browser, "select.shell-version option[value='"+shellVersion+"']")
     selectedShell.click()
 
@@ -92,6 +93,7 @@ def download(link, location = cwd, shellVersion = None, extensionVersion = None)
     # Extension Versions
     slcExtension = ui.get_element(browser, "select.extension-version")
     extensionVersion = ui.select.getValueOfInnerHtml(slcExtension, extensionVersion)
+    print("select.extension-version option[value='"+extensionVersion+"']")
     selectedExtension = ui.get_element(browser, "select.extension-version option[value='"+extensionVersion+"']")
     selectedExtension.click()
 
