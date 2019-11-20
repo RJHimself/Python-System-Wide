@@ -123,21 +123,6 @@ def download(link, downloads_folder=None, shellVersion = None, extensionVersion 
     selectedExtension.click()
 
 
-    # time.sleep(5)
-    time.sleep(15)
-    # time.sleep(50)
-    browser.quit()
-
-
-
     # WAIT FOR DOWNLOAD TO PROCESS
-    # time.sleep(5) # Let the user actually see something!
-    # driver.quit()
-
-
-# print("https://extensions.gnome.org/extension/750/openweather/")
-# print(get_versions("https://extensions.gnome.org/extension/750/openweather/"))
-
-
-# print(get_versions("https://extensions.gnome.org/extension/750/openweather/"))
-# print(download("https://extensions.gnome.org/extension/750/openweather/"))
+    time.sleep(15)
+    browser.quit()
