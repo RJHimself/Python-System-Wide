@@ -1,8 +1,34 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+#exe: py-gnome-extensions
 
 
-# <~~~~~~{ WARNING }~~~~~~>
-# This File can NOT be well executed through vs code's terminal, due to driver issues, the RunningDesktop on vs code's terminal is UNITY instead of GNOME, which causes various stupid fuckiiing problems!!! XDDD
+import ast
+import sys
+import atexit
+
+
+@atexit.register
+def on_script_exit():
+    if len(sys.argv) < 2: return
+
+    def convert_values(value):
+        #  This Function converts Numbers like "Int" or "Float" from "strings" coming from the terminal to the actual Types, like "Int" and "Float"
+
+        try: value = ast.literal_eval(value)
+        except: value=value
+        return value
+
+
+    args=""
+    function_name=sys.argv[1]
+    if len(sys.argv) > 2: args=list(map(convert_values, sys.argv[2:]))
+    getattr(sys.modules[__name__], "%s" % function_name)(*args)
+
+
+# WARNING:
+# ALL of The Code above is what makes this Script able to be Called in a Terminal
+# This type of python cli is at least possible with python 3.7.5 (64 bits)
+# ------------------------------------------------------------------------
 
 
 import time
