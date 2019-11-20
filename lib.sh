@@ -22,4 +22,5 @@ LibFolder="$(dirname "$LibFullPath")"
 
 # ------------------------
 convert-to-cli py "$LibFolder" "$LibFolder/__cli__"
+sleep 3
 CreateFolderLink "$LibFolder/__cli__" "$LibLink"
