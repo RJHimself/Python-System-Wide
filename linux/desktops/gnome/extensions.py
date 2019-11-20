@@ -64,7 +64,7 @@ def get_shell_versions(link): return get_versions(link)[0]
 def get_extension_versions(link): return get_versions(link)[1]
 
 
-def download(link, shellVersion = None, extensionVersion = None, downloads_folder=None):
+def download(link, downloads_folder=None, shellVersion = None, extensionVersion = None):
     # options = webdriver.ChromeOptions()
     # options.add_argument("download.default_directory="+home+"/Downloads")
 
