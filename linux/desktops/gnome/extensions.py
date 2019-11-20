@@ -69,11 +69,11 @@ def download(link, location = cwd, shellVersion = None, extensionVersion = None)
     # options = webdriver.ChromeOptions()
     # options.add_argument("download.default_directory="+home+"/Downloads")
 
-    browser = chrome.Start()
-    browser.get(get_link(link))
-
     arrShellVersions=get_shell_versions(link)
     arrExtensionVersions=get_extension_versions(link)
+
+    browser = chrome.Start()
+    browser.get(get_link(link))
 
 
     if (shellVersion is None) or (shellVersion not in arrShellVersions):
