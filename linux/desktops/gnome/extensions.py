@@ -23,7 +23,6 @@ from python_apps_enhancements.web import ui
 from python_apps_enhancements.web.browser import chrome
 
 home = expanduser("~")
-cwd = os.getcwd()
 
 
 
@@ -65,7 +64,7 @@ def get_shell_versions(link): return get_versions(link)[0]
 def get_extension_versions(link): return get_versions(link)[1]
 
 
-def download(link, location = cwd, shellVersion = None, extensionVersion = None, downloads_folder=None):
+def download(link, shellVersion = None, extensionVersion = None, downloads_folder=None):
     # options = webdriver.ChromeOptions()
     # options.add_argument("download.default_directory="+home+"/Downloads")
 
